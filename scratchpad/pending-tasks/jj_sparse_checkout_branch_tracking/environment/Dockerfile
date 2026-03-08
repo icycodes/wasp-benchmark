@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 LABEL Author="jj-task-builder"
 LABEL Description="jj sparse checkout branch tracking task environment"
@@ -11,10 +11,9 @@ RUN apt-get update && apt-get install -y \
     git \
     python3 \
     python3-pip \
+    python3-pytest \
     bash \
     && rm -rf /var/lib/apt/lists/*
-
-RUN pip3 install pytest
 
 RUN curl -fsSL https://github.com/jj-vcs/jj/releases/download/v0.38.0/jj-v0.38.0-x86_64-unknown-linux-musl.tar.gz \
     | tar -xz -C /usr/local/bin ./jj

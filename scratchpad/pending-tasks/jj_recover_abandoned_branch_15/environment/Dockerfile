@@ -7,7 +7,7 @@ RUN apt-get update -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSL https://github.com/jj-vcs/jj/releases/download/v0.34.0/jj-v0.34.0-x86_64-unknown-linux-musl.tar.gz \
-    | tar -xz -C /usr/local/bin jj
+    | tar -xz -C /usr/local/bin ./jj
 
 RUN mkdir -p /home/user && chmod 0755 /home/user
 
