@@ -1,4 +1,4 @@
-import { Github, Terminal } from "lucide-react";
+import { Github, Terminal, ClipboardList } from "lucide-react";
 import tasksData from "@/zealt/tasks.json";
 import zealtConfig from "@/zealt/config.json";
 import LeaderboardTable, { type LeaderboardEntry } from "./components/leaderboard-table";
@@ -15,6 +15,8 @@ type TaskValue = {
 };
 
 export default function Home() {
+  const totalTasks = Object.keys(tasksData as Record<string, unknown>).length;
+
   // Process tasks.json to compute leaderboard stats directly on the server
   const statsMap = new Map<string, {
     passed: number;
@@ -109,13 +111,18 @@ export default function Home() {
             {zealtConfig.description}
           </p>
 
-          <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground pt-4">
-            <a href={zealtConfig.github_repo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-muted-foreground pt-4">
+            <a href={zealtConfig.github_repo} target="_blank" rel="noopener noreferrer" className="flex w-full sm:w-auto items-center justify-center gap-2 hover:text-primary transition-colors">
               <Github className="w-4 h-4" />
               <span>View on GitHub</span>
             </a>
-            <div className="h-4 w-px bg-border"></div>
-            <span className="flex items-center gap-2">
+            <div className="hidden h-4 w-px bg-border sm:block"></div>
+            <span className="flex w-full sm:w-auto items-center justify-center gap-2">
+              <ClipboardList className="w-4 h-4" />
+              <span>Total tasks: {totalTasks}</span>
+            </span>
+            <div className="hidden h-4 w-px bg-border sm:block"></div>
+            <span className="flex w-full sm:w-auto items-center justify-center gap-2">
               <Terminal className="w-4 h-4" />
               <span>Last run: {new Date().toLocaleDateString()}</span>
             </span>
