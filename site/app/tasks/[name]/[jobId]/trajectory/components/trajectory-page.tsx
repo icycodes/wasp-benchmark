@@ -3,11 +3,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { HttpError } from "@/lib/http-error";
+
+export type TabConfig = {
+  value: string;
+  label: React.ReactNode;
+};
 
 type TrajectoryPageProps = {
   trajectoryUrl: string;
@@ -15,6 +21,7 @@ type TrajectoryPageProps = {
   fallbackUrl: string;
   stderrLogUrl: string | null;
   verifierLogUrl: string | null;
+  tabsConfig: TabConfig[];
 };
 
 async function fetchLogText(url: string): Promise<string> {
@@ -38,12 +45,28 @@ export function TrajectoryPage({
   fallbackUrl,
   stderrLogUrl,
   verifierLogUrl,
+  tabsConfig,
 }: TrajectoryPageProps) {
   const { resolvedTheme } = useTheme();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [iframeLoading, setIframeLoading] = useState(true);
+
+  const validTabs = tabsConfig.map((t) => t.value);
+  const [activeTab, setActiveTab] = useState(() => {
+    const queryTab = searchParams.get("tab");
+    return queryTab && validTabs.includes(queryTab) ? queryTab : validTabs[0];
+  });
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("tab", value);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
   const [browserIframeLoading, setBrowserIframeLoading] = useState<Record<string, boolean>>({});
-  const [activeTab, setActiveTab] = useState("trajectory");
   const [activeBrowserVerificationTab, setActiveBrowserVerificationTab] = useState(
     browserVerificationUrls[0]?.name || "",
   );
@@ -71,9 +94,8 @@ export function TrajectoryPage({
     setMounted(true);
   }, []);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: need to reset iframe loading state when iframeUrl changes
   useEffect(() => {
-    if (!mounted) {
+    if (!mounted || !iframeUrl) {
       return;
     }
 
@@ -156,40 +178,28 @@ export function TrajectoryPage({
       <div className="mx-auto h-full w-full max-w-[1400px] px-4 sm:px-7 lg:px-10">
           <Tabs
             value={activeTab}
-            onValueChange={setActiveTab}
+            onValueChange={handleTabChange}
             className="flex h-full min-h-0 flex-col gap-0 overflow-hidden rounded-xl border border-border bg-background/70 backdrop-blur-sm shadow-sm"
           >
             <div className="border-b border-border bg-background/40 px-3 py-3 sm:px-4">
-              <TabsList className="grid h-11 w-full sm:w-[640px] max-w-full grid-cols-4 items-stretch gap-1 rounded-xl bg-muted/55 p-1">
-                <TabsTrigger
-                  value="trajectory"
-                  className="h-full w-full cursor-pointer rounded-lg border-0 py-0 leading-none text-xs sm:text-sm text-muted-foreground transition-colors hover:bg-primary/10 hover:text-foreground data-[state=active]:bg-primary/18 data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  Trajectory
-                </TabsTrigger>
-                <TabsTrigger
-                  value="log"
-                  className="h-full w-full cursor-pointer rounded-lg border-0 py-0 leading-none text-xs sm:text-sm text-muted-foreground transition-colors hover:bg-primary/10 hover:text-foreground data-[state=active]:bg-primary/18 data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  Log
-                </TabsTrigger>
-                <TabsTrigger
-                  value="test"
-                  className="h-full w-full cursor-pointer rounded-lg border-0 py-0 leading-none text-xs sm:text-sm text-muted-foreground transition-colors hover:bg-primary/10 hover:text-foreground data-[state=active]:bg-primary/18 data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  Test
-                </TabsTrigger>
-                <TabsTrigger
-                  value="browser-verification"
-                  className="h-full w-full cursor-pointer rounded-lg border-0 py-0 leading-none text-xs sm:text-sm text-muted-foreground transition-colors hover:bg-primary/10 hover:text-foreground data-[state=active]:bg-primary/18 data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  <span className="hidden sm:inline whitespace-nowrap">Browser Verification</span>
-                  <span className="sm:hidden">Browser</span>
-                </TabsTrigger>
+              <TabsList
+                className={`flex h-11 w-full ${
+                  tabsConfig.length <= 3 ? "sm:w-[480px]" : "sm:w-[640px]"
+                } max-w-full items-stretch gap-1 rounded-xl bg-muted/55 p-1`}
+              >
+                {tabsConfig.map((tab) => (
+                  <TabsTrigger
+                    key={tab.value}
+                    value={tab.value}
+                    className="flex-1 h-full cursor-pointer rounded-lg border-0 py-0 leading-none text-muted-foreground transition-colors hover:bg-primary/10 hover:text-foreground data-[state=active]:bg-primary/18 data-[state=active]:text-foreground data-[state=active]:shadow-none"
+                  >
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
               </TabsList>
             </div>
 
-            <TabsContent value="trajectory" className="relative min-h-0 flex-1 overflow-hidden px-2" forceMount>
+            <TabsContent value="trajectory" className="relative min-h-0 flex-1 overflow-hidden" forceMount>
               <div
                 className={`absolute inset-0 z-10 overflow-auto bg-background/80 transition-opacity duration-420 ease-out delay-220 ${!mounted || iframeLoading ? "opacity-100" : "pointer-events-none opacity-0"}`}
               >
@@ -261,7 +271,7 @@ export function TrajectoryPage({
                       ))}
                     </div>
                   </div>
-                  <div className="relative min-h-0 flex-1 px-2 border-t border-border/50">
+                  <div className="relative min-h-0 flex-1">
                     <div
                       className={`absolute inset-0 z-10 overflow-auto bg-background/80 transition-opacity duration-420 ease-out delay-220 ${
                         !mounted || browserIframeLoading[activeBrowserVerificationTab]
