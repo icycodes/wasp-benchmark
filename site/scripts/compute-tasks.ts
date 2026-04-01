@@ -22,7 +22,6 @@ type TaskTrial = {
     output: number;
     cache: number;
   };
-  browser_verification_cases?: string[];
 };
 
 type TaskRecord = {
@@ -151,17 +150,6 @@ async function main() {
     const jobName = file.split('/')[0] || file.split('\\')[0];
     const trialName = data.trial_name || 'unknown-trial';
 
-    const verifierPochiDir = path.join(jobsDir, jobName, trialName, 'verifier', 'pochi');
-    let browserVerificationCases: string[] = [];
-    try {
-      const entries = await fs.readdir(verifierPochiDir, { withFileTypes: true });
-      browserVerificationCases = entries
-        .filter((entry) => entry.isDirectory())
-        .map((entry) => entry.name);
-    } catch (_e) {
-      // directory doesn't exist or other error, ignore
-    }
-
     tasks[taskName].trials.push({
       job_name: jobName,
       trial_name: trialName,
@@ -183,7 +171,6 @@ async function main() {
         output: data.agent_result?.n_output_tokens || 0,
         cache: data.agent_result?.n_cache_tokens || 0,
       },
-      browser_verification_cases: browserVerificationCases,
     });
   }
 
