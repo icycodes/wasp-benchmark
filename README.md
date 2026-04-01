@@ -1,8 +1,8 @@
-# Jujutsu Benchmark
+# Wasp.sh Benchmark
 
-This repository contains benchmarks for [Jujutsu (jj)](https://github.com/martinvonz/jj), a next-generation version control system.
+This repository contains benchmarks for Wasp.sh.
 
-You can view the evaluation reports at [tabbyml.github.io/jj-benchmark](https://tabbyml.github.io/jj-benchmark/).
+You can view the evaluation reports at [icycodes.github.io/jj-benchmark](https://icycodes.github.io/jj-benchmark/).
 
 ## Project Structure
 
