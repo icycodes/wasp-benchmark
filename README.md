@@ -2,7 +2,7 @@
 
 This repository contains benchmarks for Wasp.sh.
 
-You can view the evaluation reports at [icycodes.github.io/jj-benchmark](https://icycodes.github.io/jj-benchmark/).
+You can view the evaluation reports at [icycodes.github.io/wasp-benchmark](https://icycodes.github.io/wasp-benchmark/).
 
 ## Project Structure
 
