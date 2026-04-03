@@ -1,0 +1,29 @@
+{
+    "id": "3b67dcdf-39fc-4a67-9355-836a4ce48e57",
+    "started_at": "2026-04-03T11:42:00.815901",
+    "finished_at": "2026-04-03T11:43:17.033538",
+    "n_total_trials": 1,
+    "stats": {
+        "n_trials": 1,
+        "n_errors": 0,
+        "evals": {
+            "pochi__gpt-5.2-codex__tasks": {
+                "n_trials": 1,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.0
+                    }
+                ],
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "wasp_role_auth__h5MrTYA"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        }
+    }
+}

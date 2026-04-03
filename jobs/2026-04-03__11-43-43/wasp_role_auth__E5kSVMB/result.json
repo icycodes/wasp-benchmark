@@ -1,0 +1,97 @@
+{
+    "id": "9ff44250-22fe-42d8-be62-20a0b554c94f",
+    "task_name": "wasp_role_auth",
+    "trial_name": "wasp_role_auth__E5kSVMB",
+    "trial_uri": "file:///mnt/E/Icy/github/endless-datagen/jobs-2/2026-04-03__11-43-43/wasp_role_auth__E5kSVMB",
+    "task_id": {
+        "path": "tasks/wasp_role_auth"
+    },
+    "source": "tasks",
+    "task_checksum": "02c2d86ae3f5a9699512a081338b711083bf9344a8412c3ba4256cebe27312d5",
+    "config": {
+        "task": {
+            "path": "tasks/wasp_role_auth",
+            "git_url": null,
+            "git_commit_id": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": "tasks"
+        },
+        "trial_name": "wasp_role_auth__E5kSVMB",
+        "trials_dir": "jobs-2/2026-04-03__11-43-43",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": null,
+            "import_path": "agents.pochi:Pochi",
+            "model_name": "zai/glm-4.7",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": 4,
+            "override_memory_mb": 10240,
+            "override_storage_mb": 20480,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "cc302b91-39da-49fb-bea0-dcdab3601054"
+    },
+    "agent_info": {
+        "name": "pochi",
+        "version": "unknown",
+        "model_info": {
+            "name": "glm-4.7",
+            "provider": "zai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 0,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-04-03T03:43:43.794413Z",
+    "finished_at": "2026-04-03T03:49:03.171966Z",
+    "environment_setup": {
+        "started_at": "2026-04-03T03:43:43.794765Z",
+        "finished_at": "2026-04-03T03:43:45.358984Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-04-03T03:43:45.359036Z",
+        "finished_at": "2026-04-03T03:43:45.982777Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-04-03T03:43:45.982803Z",
+        "finished_at": "2026-04-03T03:48:48.680666Z"
+    },
+    "verifier": {
+        "started_at": "2026-04-03T03:48:48.680747Z",
+        "finished_at": "2026-04-03T03:48:52.119267Z"
+    }
+}
