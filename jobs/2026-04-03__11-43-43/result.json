@@ -1,0 +1,29 @@
+{
+    "id": "cc302b91-39da-49fb-bea0-dcdab3601054",
+    "started_at": "2026-04-03T11:43:43.792505",
+    "finished_at": "2026-04-03T11:49:03.176802",
+    "n_total_trials": 1,
+    "stats": {
+        "n_trials": 1,
+        "n_errors": 0,
+        "evals": {
+            "pochi__glm-4.7__tasks": {
+                "n_trials": 1,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.0
+                    }
+                ],
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "wasp_role_auth__E5kSVMB"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        }
+    }
+}

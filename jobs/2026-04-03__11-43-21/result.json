@@ -1,0 +1,29 @@
+{
+    "id": "1ac914f3-bc6f-499c-b6a6-2b2c446f28c4",
+    "started_at": "2026-04-03T11:43:21.513591",
+    "finished_at": "2026-04-03T11:43:39.336839",
+    "n_total_trials": 1,
+    "stats": {
+        "n_trials": 1,
+        "n_errors": 0,
+        "evals": {
+            "pochi__claude-4-6-sonnet__tasks": {
+                "n_trials": 1,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.0
+                    }
+                ],
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "wasp_role_auth__HH4UDTP"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "id": "9cf71da3-5b9b-4f7e-b51e-7b781d673abf",
+    "started_at": "2026-04-03T10:50:55.692052",
+    "finished_at": "2026-04-03T11:01:17.782937",
+    "n_total_trials": 1,
+    "stats": {
+        "n_trials": 1,
+        "n_errors": 1,
+        "evals": {
+            "pochi__gemini-3-flash__tasks": {
+                "n_trials": 1,
+                "n_errors": 1,
+                "metrics": [
+                    {
+                        "mean": 0.0
+                    }
+                ],
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "wasp_role_auth__B8tN7Cy"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "wasp_role_auth__B8tN7Cy"
+                    ]
+                }
+            }
+        }
+    }
+}
